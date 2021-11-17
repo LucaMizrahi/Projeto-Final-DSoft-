@@ -2,14 +2,25 @@
 # Importando as bibliotecas
 import pygame
 from pygame.locals import *
+
 pygame.init()
 
 # Tela Principal do jogo
 WIDTH = 600
-HEIGHT = 480
+HEIGHT = 400
 window = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption('Drunken Pirate')
 
-fundo = pygame.image.load()  # colocar path p; imagem de fundo aqui
+# Inicia assets
+'''player_WIDTH = ''
+player_HEIGHT = ''       '''
+font = pygame.font.SysFont(None, 48)
+fundo = pygame.image.load('assets/img/Background.jpg').convert()
+fundo = pygame.transform.scale(fundo, (WIDTH, HEIGHT))
+#player_img = pygame.image.load('assets/img/Drunken Sailor.png').convert()
+#player_img = pygame.transform.scale(player_img, ())
+
+
 fundoX = 0
 fundoX2 = fundo.get_width()
 
@@ -22,18 +33,20 @@ def puxa_janela():
 # Inicia estrutura de dados
 game = True
 
+clock = pygame.time.Clock()
 FPS = 30
+
 # loop principal 
 while game:
     
     puxa_janela()
 
-    pygame.clock.tick(FPS)
+    clock.tick(FPS)
 
-    fundoX -= 1.4  # Move both background images back
+    fundoX -= 1.4  # Move o background para trás
     fundoX2 -= 1.4
 
-    if fundoX < fundo.get_width() * -1:  # If our bg is at the -width then reset its position
+    if fundoX < fundo.get_width() * -1:  # se o width for negativo ele é resetado
         fundoX = fundo.get_width()
     
     if fundoX2 < fundo.get_width() * -1:
@@ -47,7 +60,7 @@ while game:
     
     # Saídas 
     window.fill((255, 255, 255))
-    # window.blit(())
+    window.blit(fundo, (0, 0))
 
     pygame.display.update()
 
