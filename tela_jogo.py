@@ -31,11 +31,35 @@ def game_screen(window):
     state = PLAYING
 
     score = 0
+    # Gatilho que eh acionado quando o pirata passa um canhao, para auxiliar na contagem do placar:
+    passou_canhao = False
 
     # ===== Loop principal =====
     pygame.mixer.music.play(loops=-1)
     while state != DONE:
         clock.tick(FPS)
+
+        # Conta o placar:
+        if len(all_cannons) > 0:
+            if pirate.rect.left > all_cannons.sprites()[0].rect.left and pirate.rect.right < all_cannons.sprites()[0].rect.right and passou_canhao == False:
+                passou_canhao = True
+            if passou_canhao == True:
+                if pirate.rect.left > all_cannons.sprites()[0].rect.right:
+                    score += 1
+                    passou_canhao = False
+
+
+
+
+        # Verifica se houve colisão entre pirata e canhao ou pirata e chao:
+        if pirate.rect.bottom >= 768:
+            state = DONE
+
+        if pygame.sprite.spritecollide(player, all_cannons, False, pygame.sprite.collide_mask):
+            state = DONE
+            assets[CRASH_SOUND].play()
+            player.kill()
+            keys_down = {}
 
         # ----- Trata eventos
         for event in pygame.event.get():
@@ -50,16 +74,6 @@ def game_screen(window):
         # ----- Atualiza estado do jogo
         # Atualizando a posição dos canhoes
         all_sprites.update()
-
-        # Verifica se houve colisão entre pirata e canhao ou pirata e chao:
-        if pirate.rect.bottom >= 768:
-            state = DONE
-
-        if pygame.sprite.spritecollide(player, all_cannons, False, pygame.sprite.collide_mask):
-            state = DONE
-            assets[CRASH_SOUND].play()
-            player.kill()
-            keys_down = {}
 
         # ----- Gera saídas
         window.fill(BLACK)  # Preenche com a cor branca

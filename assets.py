@@ -18,7 +18,7 @@ def load_assets():
     assets[BACKGROUND] = pygame.image.load(os.path.join(IMG_DIR, 'padrao_pirata.png')).convert()
     assets[CANNON_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'Cannon.png')).convert_alpha()
     assets[CANNON_IMG] = pygame.transform.scale(assets['Cannon_img'], (CANNON_WIDTH, CANNON_HEIGHT))
-    assets[PIRATE_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'Drunken Sailor.png')).convert_alpha()
+    assets[PIRATE_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'Drunken_Sailor.png')).convert_alpha()
     assets[PIRATE_IMG] = pygame.transform.scale(assets['Pirate_img'], (PIRATE_WIDTH, PIRATE_HEIGHT))
 
     # Carrega os sons do jogo
