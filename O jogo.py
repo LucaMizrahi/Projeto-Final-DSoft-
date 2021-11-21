@@ -1,18 +1,36 @@
 # Inicialização 
 # Importando as bibliotecas
 import pygame
+from configuracoes import *
 from pygame.locals import *
+from tela_inicial import init_screen
+from tela_jogo import *
 
 pygame.init()
+
+# ----- Gera tela principal
+window = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption('Drunken Sailor')
+
+state = INIT
+while state != QUIT:
+    if state == INIT:
+        state = init_screen(window)
+    elif state == GAME:
+        state = game_screen(window)
+    else:
+        state = QUIT
 
 # Tela Principal do jogo
 WIDTH = 1024
 HEIGHT = 768
 window = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('Drunken Pirate')
+pygame.display.set_caption('Drunken Sailor')
 
 mov_fundo = 0 
 vel_fundo = 4 # Velocidade de movimentação do fundo
+freq_cannon = 1500 #Milisegundos
+last_cannon = pygame.time.get_ticks()
 
 '''player_WIDTH = ''
 player_HEIGHT = ''       '''
@@ -21,7 +39,7 @@ fundo = pygame.image.load('assets/img/padrao_pirata.png').convert()
 #player_img = pygame.image.load('assets/img/Drunken Sailor.png').convert()
 #player_img = pygame.transform.scale(player_img, ())
 
-class sailor(pygame.sprite.Sprite):
+class pirate(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load('assets/img/Drunken Sailor.png').convert_alpha()
@@ -30,7 +48,7 @@ class sailor(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = [x, y]
         
-class canhao(pygame.sprite.Sprite):
+class cannon(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load('assets/img/Cannon.png').convert_alpha()
@@ -44,7 +62,7 @@ sailor_group = pygame.sprite.Group()
 cannon_group = pygame.sprite.Group()
 
 s = sailor(200, int(HEIGHT / 2))
-c = canhao(800, 628)
+c1 = canhao(800, 628)
 
 sailor_group.add(s)
 cannon_group.add(c)

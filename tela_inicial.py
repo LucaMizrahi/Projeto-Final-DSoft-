@@ -1,37 +1,40 @@
-# ===== Inicialização =====
-# ----- Importa e inicia pacotes
 import pygame
+import random
+from os import path
+from configuracoes import *
 
-pygame.init()
 
-# ----- Gera tela principal
-WIDTH = 600
-HEIGHT = 400
+def init_screen(screen):
+    # Variável para o ajuste de velocidade
+    clock = pygame.time.Clock()
 
-window = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('Drunken Sailor')
+    # Carrega o fundo da tela inicial
+    background = pygame.image.load(path.join(IMG_DIR, 'First_screen.png')).convert_alpha()
+    background_set = pygame.transform.scale(background, (WIDTH,HEIGHT))
+    background_rect = background.get_rect()
 
-# ----- Inicia estruturas de dados
-game = True
+    running = True
+    while running:
 
-# ----- Inicia assets
-image = pygame.image.load('Assets/img/First_screen.png').convert_alpha()
-background_set = pygame.transform.scale(image, (WIDTH,HEIGHT))
-font = pygame.font.SysFont(None, 50)
-text = font.render('Drunken Sailor', True, (0, 0, 0))
-# ===== Loop principal =====
-while game:
-    # ----- Trata eventos
-    for event in pygame.event.get():
-        # ----- Verifica consequências
-        if event.type == pygame.QUIT:
-            game = False
+        # Ajusta a velocidade do jogo.
+        clock.tick(FPS)
 
-    # ----- Gera saídas
-    window.blit(background_set, (0, 0))
+        # Processa os eventos (mouse, teclado, botão, etc).
+        for event in pygame.event.get():
+            # Verifica se foi fechado.
+            if event.type == pygame.QUIT:
+                state = QUIT
+                running = False
 
-    # ----- Atualiza estado do jogo
-    pygame.display.update()  # Mostra o novo frame para o jogador
+            if event.type == pygame.KEYUP:
+                state = GAME
+                running = False
 
-# ===== Finalização =====
-pygame.quit()  # Função do PyGame que finaliza os recursos utilizados
+        # A cada loop, redesenha o fundo e os sprites
+        screen.fill(BLACK)
+        screen.blit(background_set, background_rect)
+
+        # Depois de desenhar tudo, inverte o display.
+        pygame.display.flip()
+
+    return state
