@@ -52,20 +52,12 @@ def game_screen(window):
         all_sprites.update()
 
         # Verifica se houve colisão entre nave e meteoro
-        hits = pygame.sprite.spritecollide(player, all_meteors, True, pygame.sprite.collide_mask)
+        hits = pygame.sprite.spritecollide(player, all_cannons, True, pygame.sprite.collide_mask)
         if len(hits) > 0:
             # Toca o som da colisão
-            assets[BOOM_SOUND].play()
+            assets[CRASH_SOUND].play()
             player.kill()
-            lives -= 1
-            explosao = Explosion(player.rect.center, assets)
-            all_sprites.add(explosao)
-            state = EXPLODING
             keys_down = {}
-            explosion_tick = pygame.time.get_ticks()
-            explosion_duration = explosao.frame_ticks * len(explosao.explosion_anim) + 400
-
-            
 
         # ----- Gera saídas
         window.fill(BLACK)  # Preenche com a cor branca
