@@ -48,13 +48,15 @@ def game_screen(window):
                         player.jump()
 
         # ----- Atualiza estado do jogo
-        # Atualizando a posição dos meteoros
+        # Atualizando a posição dos canhoes
         all_sprites.update()
 
-        # Verifica se houve colisão entre nave e meteoro
-        hits = pygame.sprite.spritecollide(player, all_cannons, True, pygame.sprite.collide_mask)
-        if len(hits) > 0:
-            # Toca o som da colisão
+        # Verifica se houve colisão entre pirata e canhao ou pirata e chao:
+        if pirate.rect.bottom >= 768:
+            state = DONE
+
+        if pygame.sprite.spritecollide(player, all_cannons, False, pygame.sprite.collide_mask):
+            state = DONE
             assets[CRASH_SOUND].play()
             player.kill()
             keys_down = {}
