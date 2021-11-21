@@ -61,8 +61,8 @@ class cannon(pygame.sprite.Sprite):
 sailor_group = pygame.sprite.Group()
 cannon_group = pygame.sprite.Group()
 
-s = sailor(200, int(HEIGHT / 2))
-c1 = canhao(800, 628)
+s = pirate(200, int(HEIGHT / 2))
+c = cannon(800, 628)
 
 sailor_group.add(s)
 cannon_group.add(c)

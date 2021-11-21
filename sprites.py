@@ -7,7 +7,7 @@ from assets import PIRATE_IMG, CANNON_IMG
 class pirate(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load('Projeto-Final-DSoft-/Assets/img/Drunken_Sailor.png').convert_alpha()
+        self.image = pygame.image.load('assets/img/Drunken_Sailor.png').convert_alpha()
         # self.image = pygame.transform.scale(self.image, (110,110))
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
