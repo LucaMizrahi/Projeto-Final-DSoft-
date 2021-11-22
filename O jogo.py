@@ -4,7 +4,7 @@ import pygame
 from configuracoes import *
 from pygame.locals import *
 from tela_inicial import init_screen
-from tela_jogo import *
+from tela_jogo import game_screen
 
 pygame.init()
 
@@ -35,37 +35,13 @@ last_cannon = pygame.time.get_ticks()
 '''player_WIDTH = ''
 player_HEIGHT = ''       '''
 font = pygame.font.SysFont(None, 48)
-fundo = pygame.image.load('assets/img/padrao_pirata.png').convert()
+fundo = pygame.image.load('Assets/img/padrao_pirata.png').convert()
 #player_img = pygame.image.load('assets/img/Drunken Sailor.png').convert()
 #player_img = pygame.transform.scale(player_img, ())
 
-class pirate(pygame.sprite.Sprite):
-    def __init__(self, x, y):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load('assets/img/Drunken Sailor.png').convert_alpha()
-        # self.image = pygame.transform.scale(self.image, (110,110))
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.center = [x, y]
-        
-class cannon(pygame.sprite.Sprite):
-    def __init__(self, x, y):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load('assets/img/Cannon.png').convert_alpha()
-        #self.image = pygame.transform.scale(self.image, (110,110))
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.center = [x, y]
 
 
-sailor_group = pygame.sprite.Group()
-cannon_group = pygame.sprite.Group()
 
-s = pirate(200, int(HEIGHT / 2))
-c = cannon(800, 628)
-
-sailor_group.add(s)
-cannon_group.add(c)
 
 
 
@@ -102,7 +78,7 @@ while game:
 
     pygame.display.update()
 
-pygame.quit
+pygame.quit()
 
 
 

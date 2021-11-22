@@ -1,7 +1,7 @@
 import pygame
 from configuracoes import *
 from assets import *
-from sprites import *
+from sprites import pirate, cannon
 
 
 def game_screen(window):
@@ -10,7 +10,7 @@ def game_screen(window):
 
     assets = load_assets()
 
-    # Criando um grupo de meteoros
+    # Criando um grupo de canhoes
     all_sprites = pygame.sprite.Group()
     all_cannons = pygame.sprite.Group()
     groups = {}
@@ -18,13 +18,13 @@ def game_screen(window):
     groups['all_cannons'] = all_cannons
 
     # Criando o jogador
-    player = pirate(groups, assets)
+    player = pirate(200, int(HEIGHT / 2))
     all_sprites.add(player)
-    # Criando os meteoros
+    # Criando os canhhoes
     for i in range(8):
-        cannon = cannon(assets)
-        all_sprites.add(cannon)
-        all_cannons.add(cannon)
+        cannon1 = cannon(800, 628, -1)
+        all_sprites.add(cannon1)
+        all_cannons.add(cannon1)
 
     DONE = 0
     PLAYING = 1
@@ -41,10 +41,10 @@ def game_screen(window):
 
         # Conta o placar:
         if len(all_cannons) > 0:
-            if pirate.rect.left > all_cannons.sprites()[0].rect.left and pirate.rect.right < all_cannons.sprites()[0].rect.right and passou_canhao == False:
+            if player.rect.left > all_cannons.sprites()[0].rect.left and player.rect.right < all_cannons.sprites()[0].rect.right and passou_canhao == False:
                 passou_canhao = True
             if passou_canhao == True:
-                if pirate.rect.left > all_cannons.sprites()[0].rect.right:
+                if player.rect.left > all_cannons.sprites()[0].rect.right:
                     score += 1
                     passou_canhao = False
 
@@ -52,7 +52,7 @@ def game_screen(window):
 
 
         # Verifica se houve colisão entre pirata e canhao ou pirata e chao:
-        if pirate.rect.bottom >= 768:
+        if player.rect.bottom >= 768:
             state = DONE
 
         if pygame.sprite.spritecollide(player, all_cannons, False, pygame.sprite.collide_mask):
@@ -67,9 +67,10 @@ def game_screen(window):
             if event.type == pygame.QUIT:
                 state = DONE
             # Só verifica o teclado se está no estado de jogo
-            if state == PLAYING:
-                    if event.key == pygame.K_SPACE:
-                        player.jump()
+            if event.type == pygame.KEYDOWN:
+                if state == PLAYING:
+                        if event.key == pygame.K_SPACE:
+                            player.jump()
 
         # ----- Atualiza estado do jogo
         # Atualizando a posição dos canhoes
