@@ -80,7 +80,7 @@ def game_screen(window):
         window.fill(BLACK)  # Preenche com a cor branca
         window.blit(assets[BACKGROUND], (0, 0))
         # Desenhando meteoros
-        all_sprites.draw(window)
+        # all_sprites.draw(window)
 
         # Desenhando o score
         text_surface = assets[SCORE_FONT].render("{:08d}".format(score), True, YELLOW)
