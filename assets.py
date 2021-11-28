@@ -14,6 +14,7 @@ POINT_SOUND = 'point_sound'
 SCORE_FONT = 'score_font'
 
 
+
 def load_assets():
     assets = {}
     assets[BACKGROUND] = pygame.image.load(os.path.join(IMG_DIR, 'padrao_pirata.png')).convert()
