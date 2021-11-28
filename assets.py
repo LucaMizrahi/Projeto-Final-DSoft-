@@ -15,6 +15,7 @@ SCORE_FONT = 'score_font'
 CRASH_SOUND = 'crash_sound'
 POINT_SOUND = 'point_sound'
 SCORE_FONT = 'score_font'
+TELAGAMEOVER = 'tela_gameover'
 
 
 
@@ -27,6 +28,7 @@ def load_assets():
     assets[BUTTON] = pygame.image.load(os.path.join(IMG_DIR, 'button.png')).convert()
     assets[GAMEOVER] = pygame.image.load(os.path.join(IMG_DIR, 'gameover.png')).convert_alpha()
     assets[GETREADY] = pygame.image.load(os.path.join(IMG_DIR, 'getready.png')).convert_alpha()
+    assets[TELAGAMEOVER] = pygame.image.load(os.path.join(IMG_DIR, 'telagameover.png')).convert()
 
     # Carrega os sons do jogo
     pygame.mixer.music.load(os.path.join(SND_DIR, 'theme.wav'))
