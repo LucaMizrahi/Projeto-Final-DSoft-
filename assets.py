@@ -3,8 +3,7 @@ import os
 from configuracoes import *
 
  
-BACKGROUND = 'padrao_pirata'
-CANNON = 'cannon'
+BACKGROUND = 'background'
 CANNON = 'cannon'
 PIRATE = 'pirate'
 PIRATE = 'pirate'
@@ -16,19 +15,26 @@ CRASH_SOUND = 'crash_sound'
 POINT_SOUND = 'point_sound'
 SCORE_FONT = 'score_font'
 TELAGAMEOVER = 'tela_gameover'
+FIRSTSCREEN = 'first_screen'
 
 
 
 def load_assets():
     assets = {}
-    assets[BACKGROUND] = pygame.image.load(os.path.join(IMG_DIR, 'padrao_pirata.png')).convert()
+    assets[BACKGROUND] = pygame.image.load(os.path.join(IMG_DIR, 'padrao_pirata.png')).convert()   
+    assets[BACKGROUND] = pygame.transform.scale(assets['background'], (WIDTH,HEIGHT))
     assets[CANNON] = pygame.image.load(os.path.join(IMG_DIR, 'cano1.png')).convert_alpha()
     assets[PIRATE] = pygame.image.load(os.path.join(IMG_DIR, 'Drunken_Sailor.png')).convert_alpha()
     assets[PIRATE] = pygame.transform.scale(assets['pirate'], (70, 70))
     assets[BUTTON] = pygame.image.load(os.path.join(IMG_DIR, 'button.png')).convert()
     assets[GAMEOVER] = pygame.image.load(os.path.join(IMG_DIR, 'gameover.png')).convert_alpha()
     assets[GETREADY] = pygame.image.load(os.path.join(IMG_DIR, 'getready.png')).convert_alpha()
+    assets[GETREADY] = pygame.transform.scale(assets['get_ready'], (184, 267))
     assets[TELAGAMEOVER] = pygame.image.load(os.path.join(IMG_DIR, 'telagameover.png')).convert()
+    assets[TELAGAMEOVER] = pygame.transform.scale(assets['tela_gameover'], (WIDTH, HEIGHT))
+    assets[FIRSTSCREEN] = pygame.image.load(os.path.join(IMG_DIR), 'First_screen.png').convert_alpha()
+    assets[FIRSTSCREEN] = pygame.transform.scale(assets['first_screen'], (WIDTH, HEIGHT))
+    
 
     # Carrega os sons do jogo
     pygame.mixer.music.load(os.path.join(SND_DIR, 'theme.wav'))
