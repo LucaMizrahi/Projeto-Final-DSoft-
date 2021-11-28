@@ -2,12 +2,15 @@ import pygame
 import os
 from configuracoes import *
 
-
+ 
 BACKGROUND = 'padrao_pirata'
-CANNON_IMG = 'Cannon_img'
-CANNON_IMG = 'Cannon_img'
-PIRATE_IMG = 'Drunken Sailor_img'
-PIRATE_IMG = 'Drunkeb Sailor_img'
+CANNON = 'cannon'
+CANNON = 'cannon'
+PIRATE = 'pirate'
+PIRATE = 'pirate'
+BUTTON = 'button'
+GAMEOVER = 'game_over'
+GETREADY = 'get_ready'
 SCORE_FONT = 'score_font'
 CRASH_SOUND = 'crash_sound'
 POINT_SOUND = 'point_sound'
@@ -18,10 +21,12 @@ SCORE_FONT = 'score_font'
 def load_assets():
     assets = {}
     assets[BACKGROUND] = pygame.image.load(os.path.join(IMG_DIR, 'padrao_pirata.png')).convert()
-    assets[CANNON_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'Cannon.png')).convert_alpha()
-    assets[CANNON_IMG] = pygame.transform.scale(assets['Cannon_img'], (CANNON_WIDTH, CANNON_HEIGHT))
-    assets[PIRATE_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'Drunken_Sailor.png')).convert_alpha()
-    assets[PIRATE_IMG] = pygame.transform.scale(assets[PIRATE_IMG], (PIRATE_WIDTH, PIRATE_HEIGHT))
+    assets[CANNON] = pygame.image.load(os.path.join(IMG_DIR, 'cano1.png')).convert_alpha()
+    assets[PIRATE] = pygame.image.load(os.path.join(IMG_DIR, 'Drunken_Sailor.png')).convert_alpha()
+    assets[PIRATE] = pygame.transform.scale(assets['pirate'], (70, 70))
+    assets[BUTTON] = pygame.image.load(os.path.join(IMG_DIR, 'button.png')).convert()
+    assets[GAMEOVER] = pygame.image.load(os.path.join(IMG_DIR, 'gameover.png')).convert_alpha()
+    assets[GETREADY] = pygame.image.load(os.path.join(IMG_DIR, 'getready.png')).convert_alpha()
 
     # Carrega os sons do jogo
     pygame.mixer.music.load(os.path.join(SND_DIR, 'theme.wav'))
@@ -31,5 +36,4 @@ def load_assets():
     
     # Carrega fonte
     assets[SCORE_FONT] = pygame.font.Font(os.path.join(FNT_DIR, 'PressStart2P.ttf'), 28)
-
     return assets
