@@ -13,8 +13,9 @@ FPS = 60 # Frames por segundo
 # Define tamanhos
 PIRATE_WIDTH = 70
 PIRATE_HEIGHT = 70
-GETREADY_WIDTH = 184
-GETREADY_HEIGHT = 267
+GETREADY_WIDTH = 210
+GETREADY_HEIGHT = 223
+
 
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
