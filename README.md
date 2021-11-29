@@ -8,27 +8,9 @@ COMO RODAR: Para rodar o nosso jogo, basta executar o arquivo "O jogo.py"
 
 *Referências*
 
-```
-1. FlappyBird_Python by clear-codes-projects:
-```
+FlappyBird_Python by clear-codes-projects: [https://github.com/clear-code-projects/FlappyBird_Python.git](https://github.com/clear-code-projects/FlappyBird_Python.git "https://github.com/clear-code-projects/FlappyBird_Python.git")
 
-
-[
-```
-https://github.com/clear-code-projects/FlappyBird_Python.git
-```
-
-](https://github.com/clear-code-projects/FlappyBird_Python.git "https://github.com/clear-code-projects/FlappyBird_Python.git")
-
-```
-2. Handout Pygame - Academia Python:
-```
-
-
-```
-```
-
-[https://dessoft.insper-comp.com.br/conteudo/pygame](https://dessoft.insper-comp.com.br/conteudo/pygame "https://dessoft.insper-comp.com.br/conteudo/pygame")
+Handout Pygame - Academia Python: [https://dessoft.insper-comp.com.br/conteudo/pygame](https://dessoft.insper-comp.com.br/conteudo/pygame "https://dessoft.insper-comp.com.br/conteudo/pygame")
 
 ```
 ```
