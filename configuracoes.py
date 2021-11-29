@@ -16,7 +16,6 @@ PIRATE_HEIGHT = 70
 GETREADY_WIDTH = 210
 GETREADY_HEIGHT = 223
 
-
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)

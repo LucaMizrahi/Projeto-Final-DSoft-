@@ -15,26 +15,9 @@ def game_screen(window):
     window = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption('Drunken Sailor')
 
-    # Inicia assets 
-    assets = {}
-    assets['background'] = pygame.image.load('assets/img/padrao_pirata.png').convert()
-    assets['pirate'] = pygame.image.load('Assets/img/Drunken_Sailor.png').convert_alpha()
-    assets['pirate'] = pygame.transform.scale(assets['pirate'], (70, 70))
-    assets['cannon'] = pygame.image.load('assets/img/cano1.png').convert_alpha()
-    assets['button'] = pygame.image.load('assets/img/button.png')
-    assets['get_ready'] = pygame.image.load('assets/img/getready.png').convert_alpha()
-    assets['get_ready'] = pygame.transform.scale(assets['get_ready'], (210, 223))
-    assets['tela_gameover'] = pygame.image.load('assets/img/telagameover.png').convert()
-    assets['tela_gameover'] = pygame.transform.scale(assets['tela_gameover'], (WIDTH, HEIGHT))
-
-    # Carrega os sons
-    pygame.mixer.music.load('assets/audios/theme.wav')
-    pygame.mixer.music.set_volume(0.3)
-    assets['point_sound'] = pygame.mixer.Sound('assets/audios/point.wav')
-
-    # Carrega fonte
-    assets['score_font'] = pygame.font.Font(('assets/fontes/PressStart2P.ttf'), 28)
-
+    # Inicia assets
+    assets = load_assets()
+    
     # Define variáveis
     mov_fundo = 0 
     vel_fundo = 4 # Velocidade de movimentação do fundo
@@ -63,7 +46,7 @@ def game_screen(window):
     class pirate(pygame.sprite.Sprite):
         def __init__(self, x, y):
             pygame.sprite.Sprite.__init__(self)
-            self.image = assets['pirate']
+            self.image = assets[PIRATE]
             self.mask = pygame.mask.from_surface(self.image)
             self.rect = self.image.get_rect()
             self.rect.center = [x, y]
@@ -97,7 +80,7 @@ def game_screen(window):
     class cannon(pygame.sprite.Sprite):
         def __init__(self, x, y, posicao):
             pygame.sprite.Sprite.__init__(self)
-            self.image = assets['cannon']
+            self.image = assets[CANNON]
             self.mask = pygame.mask.from_surface(self.image)
             self.rect = self.image.get_rect()
 
