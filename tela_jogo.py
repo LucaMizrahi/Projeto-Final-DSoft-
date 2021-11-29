@@ -1,35 +1,43 @@
 import pygame
+import random
+from pygame.locals import *
 from configuracoes import *
 from assets import *
-from sprites import pirate, cannon
 
 
 def game_screen(window):
-    # Variável para o ajuste de velocidade
-    clock = pygame.time.Clock()
+    # Inicialização 
+    # Importando as bibliotecas
 
-    assets = load_assets()
+    pygame.init()
+    pygame.mixer.init()
 
-    # Criando um grupo de canhoes
-    all_sprites = pygame.sprite.Group()
-    all_cannons = pygame.sprite.Group()
-    groups = {}
-    groups['all_sprites'] = all_sprites
-    groups['all_cannons'] = all_cannons
+    # Tela Principal do jogo
+    window = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption('Drunken Sailor')
 
-    # Criando o jogador
-    player = pirate(200, int(HEIGHT / 2))
-    all_sprites.add(player)
-    # Criando os canhhoes
-    for i in range(8):
-        cannon1 = cannon(800, 628, -1)
-        all_sprites.add(cannon1)
-        all_cannons.add(cannon1)
+    # Inicia assets 
+    assets = {}
+    assets['background'] = pygame.image.load('assets/img/padrao_pirata.png').convert()
+    assets['pirate'] = pygame.image.load('Assets/img/Drunken_Sailor.png').convert_alpha()
+    assets['pirate'] = pygame.transform.scale(assets['pirate'], (70, 70))
+    assets['cannon'] = pygame.image.load('assets/img/cano1.png').convert_alpha()
+    assets['button'] = pygame.image.load('assets/img/button.png')
+    assets['game_over'] = pygame.image.load('assets/img/gameover.png').convert_alpha()
+    assets['game_over'] = pygame.transform.scale(assets['game_over'], (364, 100))
+    assets['get_ready'] = pygame.image.load('assets/img/getready.png').convert_alpha()
+    assets['get_ready'] = pygame.transform.scale(assets['get_ready'], (210, 223))
+    assets['tela_gameover'] = pygame.image.load('assets/img/telagameover.png').convert()
+    assets['tela_gameover'] = pygame.transform.scale(assets['tela_gameover'], (WIDTH, HEIGHT))
 
-    DONE = 0
-    PLAYING = 1
-    state = PLAYING
+    # Carrega os sons
+    pygame.mixer.music.load('assets/audios/theme.wav')
+    pygame.mixer.music.set_volume(0.3)
+    assets['die_sound'] = pygame.mixer.Sound('assets/audios/crash.wav')
+    assets['point_sound'] = pygame.mixer.Sound('assets/audios/point.wav')
 
+    # Carrega fonte
+    assets['score_font'] = pygame.font.Font(('assets/fontes/PressStart2P.ttf'), 28)
     score = 0
     # Gatilho que eh acionado quando o pirata passa um canhao, para auxiliar na contagem do placar:
     passou_canhao = False
