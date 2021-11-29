@@ -99,3 +99,86 @@ def game_screen(window):
     
 
         pygame.display.update()  # Mostra o novo frame para o jogador
+
+        
+    # DEFINE CLASSES
+    class pirate(pygame.sprite.Sprite):
+        def __init__(self, x, y):
+            pygame.sprite.Sprite.__init__(self)
+            self.image = assets['pirate']
+            self.mask = pygame.mask.from_surface(self.image)
+            self.rect = self.image.get_rect()
+            self.rect.center = [x, y]
+            self.vel = 0
+            self.click = False
+        
+        def update(self):
+            
+            # Gravidade
+            if voando == True:
+                self.vel += 0.5
+                if self.vel > 8 :
+                    self.vel = 8
+                if self.rect.bottom < 768:
+                    self.rect.y += int(self.vel)
+
+            if game_over == False:
+                # Pulo 
+                if pygame.mouse.get_pressed()[0] == 1 and self.click == False:
+                    self.click = True
+                    self.vel = -10
+                if pygame.mouse.get_pressed()[0] == 0:
+                    self.click = False
+
+    # Criando grupos de sprite para o player
+    sailor_group = pygame.sprite.Group()
+    # Instância do player(posição na tela
+    p = pirate(200, int(HEIGHT / 2))
+    sailor_group.add(p)
+
+    
+    class cannon(pygame.sprite.Sprite):
+        def __init__(self, x, y, posicao):
+            pygame.sprite.Sprite.__init__(self)
+            self.image = assets['cannon']
+            self.mask = pygame.mask.from_surface(self.image)
+            self.rect = self.image.get_rect()
+
+            # A posição 1 equivale ao cano vindo de cima e -1 ao cano vindo de baixo
+            if posicao == 1:
+                self.image = pygame.transform.flip(self.image, False, True)
+                self.rect.bottomleft = [x, y]
+            if posicao == -1:
+                self.rect.topleft = [x, y]
+        
+        def update(self):
+            self.rect.x -= vel_fundo
+
+            # Tira os canhões que já passaram pela tela
+            if self.rect.right < 0:
+                self.kill() 
+
+    # Criando grupos de sprite para os canos
+    cannon_group = pygame.sprite.Group()
+
+
+    class Button():
+        def __init__(self, x, y, image):
+            self.image = image
+            self.rect = self.image.get_rect()
+            self.rect.topleft = (x, y)
+
+        def draw(self):
+            action = False
+            
+            # Ver a posição do mouse
+            posicao = pygame.mouse.get_pos()
+
+            # Checa se o mouse está em cima do botão
+            if self.rect.collidepoint(posicao):
+                if pygame.mouse.get_pressed()[0] == 1: # Botão esquerda do mouse foi pressionado
+                    action = True
+
+            # Desenha botão
+            window.blit(self.image, (self.rect.x, self.rect.y))
+            return action
