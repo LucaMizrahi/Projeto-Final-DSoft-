@@ -22,8 +22,6 @@ def game_screen(window):
     assets['pirate'] = pygame.transform.scale(assets['pirate'], (70, 70))
     assets['cannon'] = pygame.image.load('assets/img/cano1.png').convert_alpha()
     assets['button'] = pygame.image.load('assets/img/button.png')
-    assets['game_over'] = pygame.image.load('assets/img/gameover.png').convert_alpha()
-    assets['game_over'] = pygame.transform.scale(assets['game_over'], (364, 100))
     assets['get_ready'] = pygame.image.load('assets/img/getready.png').convert_alpha()
     assets['get_ready'] = pygame.transform.scale(assets['get_ready'], (210, 223))
     assets['tela_gameover'] = pygame.image.load('assets/img/telagameover.png').convert()
