@@ -123,7 +123,7 @@ def game_screen(window):
             return action
 
     # Instânica do botão de restart(posição na tela e imagem)
-    button = Button((WIDTH / 2) - 100, (HEIGHT / 2) - 50, assets['button'])
+    button = Button((WIDTH / 2) - 100, (HEIGHT / 2) - 50, assets[BUTTON])
 
 
 
@@ -142,7 +142,7 @@ def game_screen(window):
         clock.tick(FPS)
 
         # Saídas 
-        window.blit(assets['background'], (mov_fundo, 0)) # Desenha o fundo
+        window.blit(assets[BACKGROUND], (mov_fundo, 0)) # Desenha o fundo
 
         cannon_group.draw(window) # Desenha o canhão    
 
@@ -157,11 +157,11 @@ def game_screen(window):
             if pass_cannon == True:
                 if sailor_group.sprites()[0].rect.left > cannon_group.sprites()[0].rect.right:
                     score += 1
-                    assets['point_sound'].play()
+                    assets[POINT_SOUND].play()
                     pass_cannon = False
 
         # desenha o placar na tela
-        draw_text(str(score), assets['score_font'], WHITE, int(WIDTH / 2), 20)
+        draw_text(str(score), assets[SCORE_FONT], WHITE, int(WIDTH / 2), 20)
 
         # Checa se o pirata bateu no canhão ou no teto
         if pygame.sprite.groupcollide(sailor_group, cannon_group, False, False) or p.rect.top < 0: # Os bol indicam que algum dos grupos seria deletado caso fosse atingido
@@ -194,12 +194,12 @@ def game_screen(window):
 
         # Desenha o get ready quando o jogo está ativo porém ainda não começou(voando é Falso)
         if game_over == False and voando == False:
-            window.blit(assets['get_ready'], (400, 215))                             
+            window.blit(assets[GETREADY], (400, 215))                             
 
         # Checa por game over e restart
         if game_over == True:
-            window.blit(assets['tela_gameover'], (0,0)) # Desenha a tela de game over
-            draw_text(str(score), assets['score_font'], WHITE, int(WIDTH / 2) + 60, 190) # Desenha o placar na tela de game over
+            window.blit(assets[TELAGAMEOVER], (0,0)) # Desenha a tela de game over
+            draw_text(str(score), assets[SCORE_FONT], WHITE, int(WIDTH / 2) + 60, 190) # Desenha o placar na tela de game over
             if button.draw() == True: # O botão foi apertado
                 game_over = False
                 score = restart()
