@@ -156,58 +156,82 @@ def game_screen(window):
 
     # Toca a música do jogo
     pygame.mixer.music.play(loops=-1)
-    while state != DONE:
+    # loop principal 
+    while game:
+
         clock.tick(FPS)
 
-        # Conta o placar:
-        if len(all_cannons) > 0:
-            if player.rect.left > all_cannons.sprites()[0].rect.left and player.rect.right < all_cannons.sprites()[0].rect.right and passou_canhao == False:
-                passou_canhao = True
-            if passou_canhao == True:
-                if player.rect.left > all_cannons.sprites()[0].rect.right:
+        # Saídas 
+        window.blit(assets['background'], (mov_fundo, 0)) # Desenha o fundo
+
+        cannon_group.draw(window) # Desenha o canhão    
+
+        sailor_group.draw(window) # Desenha o personagem
+        sailor_group.update() # Atualiza o que acontece com o pirate
+        
+        # Verifica o Placar
+        if len(cannon_group) > 0:
+            if sailor_group.sprites()[0].rect.left > cannon_group.sprites()[0].rect.left\
+                and sailor_group.sprites()[0].rect.right < cannon_group.sprites()[0].rect.right and pass_cannon == False:
+                pass_cannon = True
+            if pass_cannon == True:
+                if sailor_group.sprites()[0].rect.left > cannon_group.sprites()[0].rect.right:
                     score += 1
-                    passou_canhao = False
+                    assets['point_sound'].play()
+                    pass_cannon = False
 
+        # desenha o placar na tela
+        draw_text(str(score), assets['score_font'], WHITE, int(WIDTH / 2), 20)
 
+        # Checa se o pirata bateu no canhão ou no teto
+        if pygame.sprite.groupcollide(sailor_group, cannon_group, False, False) or p.rect.top < 0: # Os bol indicam que algum dos grupos seria deletado caso fosse atingido
+            game_over = True
 
+        # Checa se o pirata bateu no chão
+        if p.rect.bottom >= 768:
+            game_over = True
+            voando = False
 
-        # Verifica se houve colisão entre pirata e canhao ou pirata e chao:
-        if player.rect.bottom >= 768:
-            state = DONE
+        # Checa se o jogo ainda não acabou
+        if game_over == False and voando == True: 
+            # Gerar novos canhões
+            time_now = pygame.time.get_ticks()
+            if time_now - last_cannon > freq_cannon:
+                altura_canhao = random.randint(-100, 100)
+                canhao_baixo = cannon(WIDTH, 468 + altura_canhao, -1) # 488
+                canhao_cima = cannon(WIDTH, 260 + altura_canhao, 1) # 280
+                cannon_group.add(canhao_baixo)
+                cannon_group.add(canhao_cima)
+                last_cannon = time_now
 
-        if pygame.sprite.spritecollide(player, all_cannons, False, pygame.sprite.collide_mask):
-            state = DONE
-            assets[CRASH_SOUND].play()
-            player.kill()
-            keys_down = {}
+            # movimentação do fundo
+            mov_fundo -= vel_fundo 
+            if abs(mov_fundo) > 2048:
+                mov_fundo = 0   
 
-        # ----- Trata eventos
+            # Atualiza o que acontece com os canhões
+            cannon_group.update()
+
+        # Desenha o get ready quando o jogo está ativo porém ainda não começou(voando é Falso)
+        if game_over == False and voando == False:
+            window.blit(assets['get_ready'], (400, 215))                             
+
+        # Checa por game over e restart
+        if game_over == True:
+            window.blit(assets['tela_gameover'], (0,0)) # Desenha a tela de game over
+            draw_text(str(score), assets['score_font'], WHITE, int(WIDTH / 2) + 60, 190) # Desenha o placar na tela de game over
+            if button.draw() == True: # O botão foi apertado
+                game_over = False
+                score = restart()
+
+        # Tratamento de eventos para definir se o jogo deve acabar e se o personagem deve começar a voar
         for event in pygame.event.get():
-            # ----- Verifica consequências
             if event.type == pygame.QUIT:
-                state = DONE
-            # Só verifica o teclado se está no estado de jogo
-            if event.type == pygame.KEYDOWN:
-                if state == PLAYING:
-                        if event.key == pygame.K_SPACE:
-                            player.jump()
+                game = False
+            if event.type == pygame.MOUSEBUTTONDOWN and voando == False and game_over == False:
+                voando = True
+        
 
-        # ----- Atualiza estado do jogo
-        # Atualizando a posição dos canhoes
-        all_sprites.update()
+        pygame.display.update()
 
-        # ----- Gera saídas
-        window.fill(BLACK)  # Preenche com a cor branca
-        window.blit(assets[BACKGROUND], (0, 0))
-        # Desenhando meteoros
-        # all_sprites.draw(window)
-
-        # Desenhando o score
-        text_surface = assets[SCORE_FONT].render("{:08d}".format(score), True, YELLOW)
-        text_rect = text_surface.get_rect()
-        text_rect.midtop = (WIDTH / 2,  10)
-        window.blit(text_surface, text_rect)
-
-    
-
-        pygame.display.update()  # Mostra o novo frame para o jogador
+    pygame.quit
