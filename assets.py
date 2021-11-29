@@ -21,10 +21,11 @@ def load_assets():
     assets[BACKGROUND] = pygame.image.load(os.path.join(IMG_DIR, 'padrao_pirata.png')).convert()   
     assets[CANNON] = pygame.image.load(os.path.join(IMG_DIR, 'cano1.png')).convert_alpha()
     assets[PIRATE] = pygame.image.load(os.path.join(IMG_DIR, 'Drunken_Sailor.png')).convert_alpha()
-    assets[PIRATE] = pygame.transform.scale(assets['pirate'], (70, 70))
+    assets[PIRATE] = pygame.transform.scale(assets['pirate'], (PIRATE_WIDTH, PIRATE_HEIGHT))
     assets[BUTTON] = pygame.image.load(os.path.join(IMG_DIR, 'button.png')).convert()
+    assets[BUTTON] = pygame.transform.scale(assets['button'], (BUTTON_WIDTH, BUTTON_HEIGHT))
     assets[GETREADY] = pygame.image.load(os.path.join(IMG_DIR, 'getready.png')).convert_alpha()
-    assets[GETREADY] = pygame.transform.scale(assets['get_ready'], (184, 267))
+    assets[GETREADY] = pygame.transform.scale(assets['get_ready'], (GETREADY_WIDTH, GETREADY_HEIGHT))
     assets[TELAGAMEOVER] = pygame.image.load(os.path.join(IMG_DIR, 'telagameover.png')).convert()
     assets[TELAGAMEOVER] = pygame.transform.scale(assets['tela_gameover'], (WIDTH, HEIGHT))
     

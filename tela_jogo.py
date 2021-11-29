@@ -123,7 +123,7 @@ def game_screen(window):
             return action
 
     # Instânica do botão de restart(posição na tela e imagem)
-    button = Button((WIDTH / 2) - 50, (HEIGHT / 2) - 100, assets['button'])
+    button = Button((WIDTH / 2) - 100, (HEIGHT / 2) - 50, assets['button'])
 
 
 
