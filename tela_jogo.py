@@ -30,7 +30,6 @@ def game_screen(window):
     # Carrega os sons
     pygame.mixer.music.load('assets/audios/theme.wav')
     pygame.mixer.music.set_volume(0.3)
-    assets['die_sound'] = pygame.mixer.Sound('assets/audios/crash.wav')
     assets['point_sound'] = pygame.mixer.Sound('assets/audios/point.wav')
 
     # Carrega fonte

@@ -9,11 +9,9 @@ PIRATE = 'pirate'
 BUTTON = 'button'
 GETREADY = 'get_ready'
 SCORE_FONT = 'score_font'
-CRASH_SOUND = 'crash_sound'
 POINT_SOUND = 'point_sound'
 SCORE_FONT = 'score_font'
 TELAGAMEOVER = 'tela_gameover'
-FIRSTSCREEN = 'First_screen'
 
 
 
@@ -29,14 +27,11 @@ def load_assets():
     assets[GETREADY] = pygame.transform.scale(assets['get_ready'], (184, 267))
     assets[TELAGAMEOVER] = pygame.image.load(os.path.join(IMG_DIR, 'telagameover.png')).convert()
     assets[TELAGAMEOVER] = pygame.transform.scale(assets['tela_gameover'], (WIDTH, HEIGHT))
-    assets[FIRSTSCREEN] = pygame.image.load(os.path.join(IMG_DIR), 'First_screen.png').convert_alpha()
-    assets[FIRSTSCREEN] = pygame.transform.scale(assets['First_screen'], (WIDTH, HEIGHT))
     
 
     # Carrega os sons do jogo
     pygame.mixer.music.load(os.path.join(SND_DIR, 'theme.wav'))
     pygame.mixer.music.set_volume(0.4)
-    assets[CRASH_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'crash.wav'))
     assets[POINT_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'point.wav'))
     
     # Carrega fonte
