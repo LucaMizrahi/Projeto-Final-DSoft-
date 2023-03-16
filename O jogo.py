@@ -5,7 +5,6 @@ from configuracoes import WIDTH, HEIGHT, INIT, GAME, QUIT
 from tela_inicial import init_screen
 from tela_jogo import game_screen
 
-
 pygame.init()
 pygame.mixer.init()
 
