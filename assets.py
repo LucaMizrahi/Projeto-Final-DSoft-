@@ -1,7 +1,6 @@
 import pygame
 import os
 from configuracoes import *
-
  
 BACKGROUND = 'background'
 CANNON = 'cannon'
